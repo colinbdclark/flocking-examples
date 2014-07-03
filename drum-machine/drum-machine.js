@@ -39,7 +39,7 @@
                         },
                         trigger: {
                             id: "trig",
-                            ugen: "flock.ugen.inputTrigger",
+                            ugen: "flock.ugen.inputChangeTrigger",
                             source: 0,
                             duration: 0.01
                         }
