@@ -3,6 +3,10 @@
     flock.init();
     flock.enviro.shared.play();
 
+    /*************
+     * The Synth *
+     *************/
+
     fluid.defaults("flock.demo.moogySynth", {
         gradeNames: ["flock.synth", "autoInit"],
 
@@ -42,7 +46,12 @@
         }
     });
 
-    fluid.defaults("flock.demo.synthUI", {
+
+    /**********************
+     * The Main Component *
+     **********************/
+
+    fluid.defaults("flock.demo.moogyUI", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
 
         components: {
@@ -51,33 +60,91 @@
             },
 
             piano: {
-                type: "automm.keyboardController",
-                container: "{that}.dom.keyboard",
-                options: {
-                    model: {
-                        firstNote: 24,
-                        auto: true,
-                        octaves: 5
-                    },
-
-                    listeners: {
-                        noteOn: {
-                            func: "{synth}.set",
-                            args: {
-                                "carrier.freq": "@expand:flock.midiFreq({arguments}.0.note)",
-                                "env.gate": 1.0
-                            }
-                        },
-                        noteOff: {
-                            func: "{synth}.set",
-                            args: {
-                                "env.gate": 0.0
-                            }
-                        }
-                    }
-                }
+                type: "flock.demo.keyboard",
+                container: "{that}.dom.keyboard"
             },
 
+            knobPanel: {
+                type: "flock.demo.knobPanel",
+                container: "{that}.dom.knobPanel"
+            }
+        },
+
+        selectors: {
+            keyboard: "#keyboard",
+            knobPanel: "#controls"
+        }
+    });
+
+
+    /************
+     * Keyboard *
+     ************/
+
+    fluid.defaults("flock.demo.keyboard", {
+        gradeNames: ["automm.keyboardController", "autoInit"],
+
+        model: {
+            firstNote: 24,
+            auto: true,
+            octaves: 5
+        },
+
+        listeners: {
+            noteOn: {
+                func: "{synth}.set",
+                args: {
+                    "carrier.freq": "@expand:flock.midiFreq({arguments}.0.note)",
+                    "env.gate": 1.0
+                }
+            },
+            noteOff: {
+                func: "{synth}.set",
+                args: {
+                    "env.gate": 0.0
+                }
+            }
+        }
+    });
+
+
+    /**********
+     * A Knob *
+     **********/
+
+    fluid.defaults("flock.demo.knob", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+
+        events: {
+            onChange: null
+        },
+
+        listeners: {
+            onCreate: {
+                "this": "{that}.dom.container.0",
+                method: "addEventListener",
+                args: [
+                    "change",
+                    "{that}.events.onChange.fire"
+                ]
+            },
+
+            onChange: {
+                func: "{synth}.set",
+                args: ["{that}.options.input", "{arguments}.0.target.value"]
+            }
+        }
+    });
+
+
+    /**********************
+     * The Panel of Knobs *
+     **********************/
+     
+    fluid.defaults("flock.demo.knobPanel", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+
+        components: {
             cutoffKnob: {
                 type: "flock.demo.knob",
                 container: "{that}.dom.cutoffKnob",
@@ -135,15 +202,7 @@
             }
         },
 
-        events: {
-            onCutoff: null,
-            onAttack: null,
-            onRelease: null,
-            onVolume: null
-        },
-
         selectors: {
-            keyboard: "#keyboard",
             cutoffKnob: "#cutoff",
             resonanceAddKnob: "#res-add",
             resonanceMulKnob: "#res-mul",
@@ -151,30 +210,6 @@
             attackKnob: "#attack",
             releaseKnob: "#release",
             volumeKnob: "#volume"
-        }
-    });
-
-    fluid.defaults("flock.demo.knob", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
-
-        events: {
-            onChange: null
-        },
-
-        listeners: {
-            onCreate: {
-                "this": "{that}.dom.container.0",
-                method: "addEventListener",
-                args: [
-                    "change",
-                    "{that}.events.onChange.fire"
-                ]
-            },
-
-            onChange: {
-                func: "{synth}.set",
-                args: ["{that}.options.input", "{arguments}.0.target.value"]
-            }
         }
     });
 
