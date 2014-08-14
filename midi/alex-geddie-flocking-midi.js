@@ -268,7 +268,7 @@
                             i.set(\carrier,newCarrier);
                         };
                         */
-                        "19": {
+                        "35": {
                             synth: "edwin",
                             input: "carrier.freq",
                             transform: {

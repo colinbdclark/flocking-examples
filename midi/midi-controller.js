@@ -19,7 +19,7 @@
                 type: "flock.midi.connection",
                 options: {
                     ports: {
-                        input: 0              // Connect to the first available input port.
+                        input: "*"              // Connect to the first available input port.
                     },
 
                     openImmediately: true,    // Immediately upon instantiating the connection.
