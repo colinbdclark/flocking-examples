@@ -18,11 +18,32 @@ main {
     padding-left: 1%;
 }
 
-webaudio-knob {
+.label {
     float: left;
-    padding: 1%;
+    font-size: 2em;
+    padding: 1% 5% 0% 0.2%;
+    font-family: Optima, Tahoma, Geneva, sans-serif;
+    color: #aaa;
 }
 
-#volume {
+#controls:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+webaudio-knob {
+    float: left;
+    padding-right: 2%;
+}
+
+#gfx {
+    margin: 2px;
+    border: 2px solid #999;
+    border-radius: 150px;
+    background-color: #000;
     float: right;
+    position: absolute;
+    top: 4%;
+    left: 78%;
 }

@@ -7,26 +7,36 @@
         gradeNames: ["flock.synth", "autoInit"],
 
         synthDef: {
-            id: "filter",
-            ugen: "flock.ugen.filter.moog",
-            cutoff: 2000,
-            resonance: {
-                ugen: "flock.ugen.sin",
-                freq: 2,
-                mul: 1.5,
-                add: 1.5
-            },
+            ugen: "flock.ugen.scope",
             source: {
-                id: "carrier",
-                ugen: "flock.ugen.lfSaw",
-                freq: 440,
-                mul: {
-                    id: "env",
-                    ugen: "flock.ugen.env.simpleASR",
-                    attack: 0.25,
-                    sustain: 0.7,
-                    release: 1.0,
-                    gate: 0.0
+                id: "filter",
+                ugen: "flock.ugen.filter.moog",
+                cutoff: 2000,
+                resonance: {
+                    ugen: "flock.ugen.sin",
+                    freq: 2,
+                    mul: 1.5,
+                    add: 1.5
+                },
+                source: {
+                    id: "carrier",
+                    ugen: "flock.ugen.lfSaw",
+                    freq: 440,
+                    mul: {
+                        id: "env",
+                        ugen: "flock.ugen.env.simpleASR",
+                        attack: 0.25,
+                        sustain: 0.7,
+                        release: 1.0,
+                        gate: 0.0
+                    }
+                }
+            },
+            options: {
+                canvas: "#gfx",
+                styles: {
+                    strokeColor: "orange",
+                    strokeWidth: 2
                 }
             }
         }
