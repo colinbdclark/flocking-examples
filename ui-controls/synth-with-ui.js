@@ -1,6 +1,9 @@
 (function () {
 
-    flock.init();
+    flock.init({
+        bufferSize: 1024
+    });
+    
     flock.enviro.shared.play();
 
     /*************
@@ -140,7 +143,7 @@
     /**********************
      * The Panel of Knobs *
      **********************/
-     
+
     fluid.defaults("flock.demo.knobPanel", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
 
