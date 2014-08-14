@@ -1,0 +1,28 @@
+body {
+    padding-left: 1%;
+    width: 90%;
+    background-color: #777;
+    color: #fff;
+}
+
+.section {
+    margin-top: 0.5%;
+    border-radius: 20px;
+    background-color: #111;
+    width: 90%;
+    padding: 2%;
+}
+
+main {
+    padding-top: 3%;
+    padding-left: 1%;
+}
+
+webaudio-knob {
+    float: left;
+    padding: 1%;
+}
+
+#volume {
+    float: right;
+}

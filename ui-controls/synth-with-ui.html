@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flocksynth</title>
+        <meta charset="UTF-8" />
+
+        <link rel="stylesheet" href="synth-with-ui.css" />
+
+        <!-- Flocking -->
+        <script src="../bower_components/flocking/dist/flocking-all.js"></script>
+
+        <!-- Polymer and the g200k Web Audio Controls -->
+        <script src="third-party/webaudio-controls/js/platform.js"></script>
+        <link rel="import" href="third-party/webaudio-controls/webcomponents/polymer.html">
+        <link rel="import" href="third-party/webaudio-controls/webcomponents/controls.html">
+
+        <!-- AutoMM Piano -->
+        <script src="third-party/amm/js/d3.js"></script>
+        <script src="third-party/amm/js/automm.js"></script>
+
+        <!-- The code for this demo. -->
+        <script src="synth-with-ui.js"></script>
+
+    </head>
+
+    <body>
+        <main>
+            <div id="controls" class="section">
+
+                <webaudio-knob id="res-mul" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="1.5" min="0.01" max="10" step="0.01"
+                    diameter="64" sprites="100" tooltip="Resonance Add"></webaudio-knob>
+
+                <webaudio-knob id="res-add" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="1.5" min="0.01" max="10" step="0.01"
+                    diameter="64" sprites="100" tooltip="Resonance Mul"></webaudio-knob>
+
+                <webaudio-knob id="res-change" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="2" min="0.01" max="10" step="0.01"
+                    diameter="64" sprites="100" tooltip="Resonance Change"></webaudio-knob>
+
+                <webaudio-knob id="cutoff" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="2000" min="1000" max="20000" step="10"
+                    diameter="64" sprites="100" tooltip="Cutoff"></webaudio-knob>
+
+                <webaudio-knob id="attack" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="0.25" min="0.001" max="5.0" step="0.001"
+                    diameter="64" sprites="100" tooltip="Attack"></webaudio-knob>
+
+                <webaudio-knob id="release" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="1" min="0.001" max="10.0" step="0.001"
+                    diameter="64" sprites="100" tooltip="Attack"></webaudio-knob>
+
+                <webaudio-knob id="volume" src="third-party/webaudio-controls/img/LittlePhatty.png"
+                    value="0.7" min="0.0" max="1.0" step="0.01"
+                    diameter="64" sprites="100" tooltip="Attack"></webaudio-knob>
+
+            </div>
+
+            <div id="keyboard" class="section" />
+        </main>
+
+        <script>
+            window.synth = flock.demo.synthUI("main");
+        </script>
+    </body>
+</html>
